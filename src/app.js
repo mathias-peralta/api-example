@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors');
 
 const usersRouter = require('./routes/usersRouter');
 
@@ -14,7 +15,7 @@ app.use(express.urlencoded({
 
 //middleware
 app.use(morgan('dev'))
-
+app.use(cors());
 //routes
 app.use(usersRouter);
 
