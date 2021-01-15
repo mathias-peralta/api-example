@@ -1,8 +1,9 @@
 const controller = {};
 const User = require('../models/User');
 
-controller.listUser = (req, res) => {
-    res.send('Users');
+controller.listUser = async (req, res) => {
+    const allUsers = await User.find();
+    res.send(allUsers);
 }
 
 controller.saveNewUser = async (req, res) => {
@@ -15,6 +16,17 @@ controller.saveNewUser = async (req, res) => {
     });
     const usersaved = await newUser.save();
     console.log(usersaved);
+}
+
+controller.editUser = async (req, res) => {
+    console.log(req.params);
+    await User.findByIdAndUpdate(`${req.params.id}`,req.body);
+    res.send('edited...');
+}
+
+controller.deleteUser = async (req, res) => {
+    await User.findByIdAndDelete(req.params.id);
+    res.send('deleted...');
 }
 
 module.exports = controller;
