@@ -16,6 +16,7 @@ controller.saveNewUser = async (req, res) => {
     });
     const usersaved = await newUser.save();
     console.log(usersaved);
+    res.send('saved...')
 }
 
 controller.editUser = async (req, res) => {
